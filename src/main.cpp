@@ -60,9 +60,16 @@ void loop() {
         //delay(1000);
         g_OLED.sendBuffer();
 
-        for (int i = 0; i < NUM_LEDS; i++){
+        for (int i = 1; i < NUM_LEDS + 1; i++){
+            
+            if (i % 2 == 0){
 
-           g_LEDs[i] = CRGB::Red; 
+                g_LEDs[i] = CRGB::BlueViolet;
+            }
+            else {
+
+                g_LEDs[i] = CRGB::BlueViolet;
+            }
         }
         
         FastLED.show();

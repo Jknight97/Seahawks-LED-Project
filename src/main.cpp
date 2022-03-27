@@ -1,22 +1,23 @@
 #include <Arduino.h>
 #include <U8g2lib.h>
+#define FASTLED_INTERNAL
 #include <FastLED.h>
 
-#define FASTLED_INTERNAL
+
 #define OLED_CLOCK 15
 #define OLED_DATA   4
 #define OLED_RESET 16
-#define NUM_LEDS  60
-#define LED_PIN 22
+#define NUM_LEDS   60
+#define LED_PIN    21
 
+CRGB g_LEDs[NUM_LEDS] = {0};
 U8G2_SSD1306_128X64_NONAME_F_HW_I2C g_OLED(U8G2_R2, OLED_RESET, OLED_CLOCK, OLED_DATA);
 int g_lineHeight = 0;
-CRGB g_LEDs[NUM_LEDS] = {0};
 
-static double FramesPerSecond(double seconds){
+double FramesPerSecond(double seconds){
     
-    double framesPerSecond;
-    framesPerSecond = (framesPerSecond * .9) + (1.0 / seconds);
+    static double framesPerSecond;
+    framesPerSecond = (framesPerSecond * .9) + (1.0 / seconds * 0.1);
     return framesPerSecond;
 }
 
@@ -34,16 +35,16 @@ void setup(){
     g_OLED.setFont(u8g2_font_profont15_tf);
     g_lineHeight = g_OLED.getFontAscent() - g_OLED.getFontDescent();
 
-    FastLED.addLeds<WS2812B, LED_PIN, GRB>(g_LEDs);
+    FastLED.addLeds<WS2812B, LED_PIN, GRB>(g_LEDs, NUM_LEDS);
     FastLED.setBrightness(16);
 }
 
 void loop() {
 
-    digitalWrite(LED_BUILTIN, 0);
-    delay(1000);
-    digitalWrite(LED_BUILTIN, 1);
-    delay(1000);
+    //digitalWrite(LED_BUILTIN, 0);
+    //delay(1000);
+    //digitalWrite(LED_BUILTIN, 1);
+    //delay(1000);
     bool bLED = 0;
     double fps = 0;
 
@@ -59,7 +60,11 @@ void loop() {
         //delay(1000);
         g_OLED.sendBuffer();
 
-        g_LEDs[0] = CRGB::Red;
+        for (int i = 0; i < NUM_LEDS; i++){
+
+           g_LEDs[i] = CRGB::Red; 
+        }
+        
         FastLED.show();
 
         double dEnd = millis() / 1000.0;

@@ -116,7 +116,27 @@ void connectToWifi(){
 }
 
 // Checks stats of game for score updates
-void checkGameStats(){}
+bool * checkGameStats(){
+
+    bool arr[2];
+
+    //getter method for game stat increases
+    //keep track of DK TD stat and seahawks score
+
+    //if (seahawks score increases){
+        //if (dk.stat increases){
+
+            //arr[0] = true;
+            //arr[1] = true;
+        //}
+        //else{
+
+            //arr[0] = false;
+            //arr[1] = true;
+        //}
+    //}
+
+}
 
 bool isDK(){
 
@@ -204,7 +224,6 @@ void loop() {
             seahawksScore();
             FastLED.show();
         }
-
 
         double dEnd = millis() / 1000.0;
         fps = FramesPerSecond(dEnd - dStart);

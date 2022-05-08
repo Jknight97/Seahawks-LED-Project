@@ -115,8 +115,11 @@ void connectToWifi(){
     }
 }
 
+int DKScore;
+int SeahawksScore;
+
 // Checks stats of game for score updates
-bool * checkGameStats(){
+bool checkGameStats(){
 
     bool arr[2];
 
@@ -136,6 +139,16 @@ bool * checkGameStats(){
         //}
     //}
 
+}
+
+int getDKScoreJSON(){
+
+    //get JSON information of DK, return touchdowns
+}
+
+int getSeattleScoreJSON(){
+
+    //get JSON information of Seattle, return current score
 }
 
 bool isDK(){
